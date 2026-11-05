@@ -40,7 +40,7 @@ type Tab = "color" | "shape" | "decor";
 
 export default function App() {
   const [nails, setNails] = useState<NailState[]>(makeEmptyNails);
-  const [selectedColor, setSelectedColor] = useState<string>(COLORS[0]);
+  const [selectedColor, setSelectedColor] = useState<string>(COLORS[0]!);
   const [selectedDecoration, setSelectedDecoration] = useState<NailDecoration>("none");
   const [selectedShape, setSelectedShape] = useState<NailShape>("round");
   const [score, setScore] = useState(0);
@@ -85,7 +85,7 @@ export default function App() {
     (absoluteIndex: number, x: number, y: number) => {
       setNails((prev) => {
         const updated = [...prev];
-        const nail = updated[absoluteIndex];
+        const nail = updated[absoluteIndex]!;
         const wasPainted = nail.painted;
 
         updated[absoluteIndex] = {
@@ -120,7 +120,7 @@ export default function App() {
               ...createSparkles(
                 100 + Math.random() * (window.innerWidth - 200),
                 100 + Math.random() * 200,
-                COLORS[Math.floor(Math.random() * COLORS.length)],
+                COLORS[Math.floor(Math.random() * COLORS.length)]!,
               ),
             );
           }
@@ -158,7 +158,7 @@ export default function App() {
       const newSparkles = createSparkles(
         100 + Math.random() * (window.innerWidth - 200),
         80 + Math.random() * 150,
-        COLORS[Math.floor(Math.random() * COLORS.length)],
+        COLORS[Math.floor(Math.random() * COLORS.length)]!,
       );
       sparklesRef.current = [...sparklesRef.current, ...newSparkles];
     }

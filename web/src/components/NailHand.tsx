@@ -19,7 +19,7 @@ const NAIL_HEIGHT_RATIO = 0.55; // nail takes up top 55% of finger height
 // Decoration renderers
 function renderDecoration(
   decoration: NailDecoration,
-  color: string,
+  _color: string,
   w: number,
   h: number,
 ): React.ReactNode {
@@ -156,7 +156,7 @@ export default function NailHand({ nails, shape, hand, onNailClick }: Props) {
         style={{ flexDirection: isLeft ? "row" : "row-reverse" }}
       >
         {FINGER_WIDTHS.map((fw, i) => {
-          const fh = FINGER_HEIGHTS[i];
+          const fh = FINGER_HEIGHTS[i]!;
           const nailH = Math.round(fh * NAIL_HEIGHT_RATIO);
           const nail = nails[i];
           const isPainted = nail?.painted;
@@ -171,7 +171,6 @@ export default function NailHand({ nails, shape, hand, onNailClick }: Props) {
                 className="relative cursor-pointer"
                 style={{ width: fw, height: nailH, marginBottom: -2 }}
                 onClick={(e) => {
-                  const rect = (e.target as HTMLElement).closest('[data-nail]')?.getBoundingClientRect();
                   onNailClick(i, e.clientX, e.clientY);
                   e.stopPropagation();
                 }}
